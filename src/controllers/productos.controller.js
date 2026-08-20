@@ -1,6 +1,34 @@
 const { connectToDatabase } = require('../config/database');
 const { ObjectId } = require('mongodb');
 
+const  new_product=[
+    {
+        Nombre:'caramelo',precio : 5 , categoria:'dulce'
+    },
+    
+    {
+        Nombre:'manzana',precio : 20 , categoria:'fruta'
+    },
+    
+    {
+        Nombre:'zapato',precio : 500 , categoria:'calzado'
+    }
+
+];
+
+const new_bulk = async(req, res)=> {
+    try{
+        const db = await connectToDatabase();
+
+        const productos = await 
+        db.collection('productos').insertMany(new_product).toArray();
+        res.json(productos);
+    }
+    catch(error){
+        console.error('Error fetching productos:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
 const getProductos = async (req, res) => {
     try {
         //ESPERAMOS CONECTARNOS A MONGODB Y OBTENER LA BASE DE DATOS
@@ -123,5 +151,6 @@ module.exports = {
     createProducto, 
     createProductos, 
     updateProducto, 
-    deleteProducto
+    deleteProducto,
+    new_bulk
 };
