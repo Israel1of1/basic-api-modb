@@ -21,7 +21,7 @@ const new_bulk = async(req, res)=> {
         const db = await connectToDatabase();
 
         const productos = await 
-        db.collection('productos').insertMany(new_product).toArray();
+        db.collection('productos').insertMany(new_product);
         res.json(productos);
     }
     catch(error){
