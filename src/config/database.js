@@ -13,8 +13,11 @@ async function connectToDatabase(){
         return db;
     } catch (error) {
         console.error('Error connecting to MongoDB:', error);
-        throw error;
+        process.exit(1);
     }
 }
 
-module.exports = { connectToDatabase };
+module.exports = { 
+    connectToDatabase, 
+    client
+};
